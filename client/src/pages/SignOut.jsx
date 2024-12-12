@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 
 export default function SignOut() {
-  const [formData, setFormData] =useState{{}};
+  const [formData, setFormData] =useState{{null}};
   const handleChange =(e)=>{
 
   }
