@@ -19,4 +19,4 @@ app.listen(3000, () => {
 });
 
 
-app.use('/api/user', userRo uter);
+app.use('/api/user', userRouter);
