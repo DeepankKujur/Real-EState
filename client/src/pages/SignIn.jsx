@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { signInFailure, signInStart, signInSuccess } from '../redux/user/userSlice';
+import OAuth from '../components/OAuth';
 
 
 
@@ -118,10 +119,11 @@ export default function SignIn() {
                             <button
                                 disabled={loading}
                                 type="submit"
-                                className="w-max shadow-xl py-2 px-4 text-sm text-gray-800 font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 focus:outline-none"
+                                className="w-full mb-2 shadow-xl py-2 px-4 text-sm text-gray-800 font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 focus:outline-none"
                             >
                                {loading?"Loading...":'Sign In'}
                             </button>
+                            <OAuth/>
                             <p className="text-xs text-white mt-6">
                             <Link to={"/sign-up"}>
                                Do not have an account? <a href="#" className="text-yellow-400 font-semibold hover:underline ml-1">Sign-Up</a>

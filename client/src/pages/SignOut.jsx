@@ -1,6 +1,7 @@
 
 import {React,  useState } from 'react';
 import { Link ,useNavigate} from 'react-router-dom';
+import OAuth from '../components/OAuth';
 
 export default function SignOut() {
    
@@ -43,6 +44,8 @@ export default function SignOut() {
             setError(error.message);
         }
     }
+
+
     return (
         <div className="font-[sans-serif] bg-white md:h-screen">
             <div className="grid md:grid-cols-2 items-center gap-4 h-half">
@@ -133,10 +136,11 @@ export default function SignOut() {
                             <button
                                 disabled={loading}
                                 type="submit"
-                                className="w-max shadow-xl py-2 px-4 text-sm text-gray-800 font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 focus:outline-none"
+                                className="w-full mb-2 shadow-xl py-2 px-4 text-sm text-gray-800 font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 focus:outline-none"
                             >
                                {loading?"Loading...":'Sign Up'}
                             </button>
+                            <OAuth/>
                             <p className="text-xs text-white mt-6">
                             <Link to={"/sign-in"}>
                                 Already have an account? <a href="#" className="text-yellow-400 font-semibold hover:underline ml-1">Sign-In</a>
@@ -150,4 +154,3 @@ export default function SignOut() {
         </div>
     );
 }
-
