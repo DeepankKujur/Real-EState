@@ -70,7 +70,7 @@ export default function SignIn() {
 
                         {/* Email Field */}
                         <div className="mt-4">
-                            <label className="text-white text-xs block mb-1">Email</label>
+                            <label className="text-white text-lg block mb-1">Email</label>
                             <div className="relative flex items-center">
                                 <input
                                     name="email"
@@ -89,7 +89,7 @@ export default function SignIn() {
 
                         {/* Password Field */}
                         <div className="mt-4">
-                            <label className="text-white text-xs block mb-1">Password</label>
+                            <label className="text-white text-lg block mb-1">Password</label>
                             <div className="relative flex items-center">
                                 <input
                                     name="password"
