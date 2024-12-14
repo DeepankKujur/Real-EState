@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link ,useNavigate} from 'react-router-dom';
 
@@ -42,6 +43,7 @@ export default function SignOut() {
             setError(error.message);
         }
     }
+
 
     return (
         <div className="font-[sans-serif] bg-white md:h-screen">
