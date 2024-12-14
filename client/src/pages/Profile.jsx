@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 export default function SignIn() {
   return (
@@ -71,12 +73,12 @@ export default function SignIn() {
               Update
             </button>
             {/* Create Listing Button */}
-            <button
+            <Link
               type="button"
-              className="w-full py-2 px-4 text-sm text-white font-semibold rounded-md bg-gray-600 hover:bg-gray-700 focus:outline-none"
+              className="w-full py-2 px-4 text-sm text-white font-semibold rounded-md bg-purple-900 text-center hover:bg-purple-600 focus:outline-none"
             >
               Create Listing
-            </button>
+            </Link>
             {/* Additional Links */}
             <div className="flex justify-between text-sm mt-4">
               <span className="text-gray-500 cursor-pointer hover:text-gray-700">Delete Account</span>
