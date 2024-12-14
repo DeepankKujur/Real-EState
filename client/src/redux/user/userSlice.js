@@ -32,3 +32,5 @@ export const { signInFailure, signInSuccess, signInStart } = userSlice.actions;
 //signInStart() creates an action with type: 'user/signInStart'.
 
 export default userSlice.reducer;
+
+// we have to use redux persist because after sign in if the user refresh the page then  all the credentials are lost  so to store them in a local storage so that the data is not lost after the refresh we have to use redux persist
