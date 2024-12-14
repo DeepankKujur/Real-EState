@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function SignIn() {
   return (
-    <div className="font-[sans-serif] bg-white min-h-screen flex justify-center items-center p-4">
-      <div className="bg-gray-50 p-10 rounded-lg shadow-lg w-full max-w-2xl flex justify-center items-center">
+    <div className="font-[sans-serif] bg-gray-400 min-h-screen flex justify-center items-center p-4">
+      <div className="bg-gray-200 p-10 rounded-lg shadow-lg w-full  max-w-3xl flex justify-center items-center ">
         <form className="w-full max-w-lg">
           <div className="mb-6 text-center">
             <h3 className="text-xl font-bold text-blacl-400">Profile</h3>
