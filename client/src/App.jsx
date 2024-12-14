@@ -29,7 +29,7 @@ export default function App() {
       <Route path='/create-listing'  element={<CreateListing/>} />  
       <Route path='/about' element={<About />} />  
       <Route element={<PrivateRoute/>}>
-          <Route path='/profile' element={<Profile />} />  
+          <Route path='/profile' element={<Profile/>} />  
           </Route>
       </Routes>
     </BrowserRouter>
