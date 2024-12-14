@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link ,useNavigate} from 'react-router-dom';
+import OAuth from '../components/OAuth';
 
 export default function SignOut() {
    
@@ -137,6 +138,7 @@ export default function SignOut() {
                             >
                                {loading?"Loading...":'Sign Up'}
                             </button>
+                            <OAuth/>
                             <p className="text-xs text-white mt-6">
                             <Link to={"/sign-in"}>
                                 Already have an account? <a href="#" className="text-yellow-400 font-semibold hover:underline ml-1">Sign-In</a>
