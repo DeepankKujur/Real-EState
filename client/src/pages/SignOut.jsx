@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import {React,  useState } from 'react';
 import { Link ,useNavigate} from 'react-router-dom';
 
 export default function SignOut() {
@@ -149,8 +149,5 @@ export default function SignOut() {
             </div>
         </div>
     );
-
-  }
-
 }
 
