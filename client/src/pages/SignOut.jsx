@@ -136,7 +136,7 @@ export default function SignOut() {
                             <button
                                 disabled={loading}
                                 type="submit"
-                                className="w-max shadow-xl py-2 px-4 text-sm text-gray-800 font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 focus:outline-none"
+                                className="w-full mb-2 shadow-xl py-2 px-4 text-sm text-gray-800 font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 focus:outline-none"
                             >
                                {loading?"Loading...":'Sign Up'}
                             </button>
