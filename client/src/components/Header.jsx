@@ -8,7 +8,7 @@ function Header() {
                 <Link to="/">
                     <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
                         <span className="text-slate-500">Gd</span>
-                        <span className="text-slate-700">Groups</span>
+                        <span className="text-slate-700">-Groups</span>
                     </h1>
                 </Link>
                 <form className="bg-sky-50 p-2 rounded-full flex items-center shadow-md shadow-gray-400">
