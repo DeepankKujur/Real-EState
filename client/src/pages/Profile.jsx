@@ -1,20 +1,30 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-export default function SignIn() {
+export default function Profile() {
+  const {currentUser} =useSelector((state)=>state.user)
   return (
-    <div className="font-[sans-serif] bg-gray-400 min-h-screen flex justify-center items-center p-4">
+    <div className="font-[sans-serif] bg-gray-400 min-h-screen flex justify-center items-center p-4 ">
       <div className="bg-gray-200 p-10 rounded-lg shadow-lg w-full  max-w-3xl flex justify-center items-center ">
         <form className="w-full max-w-lg">
           <div className="mb-6 text-center">
             <h3 className="text-xl font-bold text-blacl-400">Profile</h3>
           </div>
+          <div className="flex justify-center items-center mt-2">
+           
+            <img
+    src={currentUser.avatar}
+    alt="profile"
+    className="rounded-full h-28 w-28 object-cover cursor-pointer"
+  />
+</div>
 
           {/* Full Name Field */}
           <div>
-            <label className="text-black text-xs block mb-1">Full Name</label>
+            <label className="text-black text-xs block mb-1">UserName</label>
             <div className="relative flex items-center">
               <input
-                name="name"
+                name="userName"
                 type="text"
                 required
                 className="w-full bg-transparent text-sm text-black border-b border-gray-300 focus:border-yellow-400 px-2 py-2 outline-none"
