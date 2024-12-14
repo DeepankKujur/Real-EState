@@ -6,6 +6,9 @@ import SignOut from './pages/SignOut';
 import About from './pages/About';
 import Profile from './pages/Profile';
 import Header from './components/Header';
+import CreateListing from './pages/CreateListing';
+import Listing from './pages/Listing';
+import Search from './pages/Search';
 
 export default function App() {
   return (
@@ -15,8 +18,11 @@ export default function App() {
       <Route path='/' element={<Home/>} />  
       <Route path='/sign-in' element={<SignIn/>} />  
       <Route path='/sign-up' element={<SignOut/>} />  
+      <Route path='/search' element={<Search/>} />  
       <Route path='/about' element={<About/>} />  
+      <Route path='/listing/:listingId'  element={<Listing/>} />  
       <Route path='/profile' element={<Profile/>} />  
+      <Route path='/create-listing'  element={<CreateListing/>} />  
       </Routes>
     </BrowserRouter>
   )
