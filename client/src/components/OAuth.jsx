@@ -11,25 +11,30 @@ export default function OAuth() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleGoogleClick = async () => {
-   try {
-     const provider = new GoogleAuthProvider()
-     const auth = getAuth(app)
-     const result = await signInWithPopup(auth, provider)
-     const res = await fetch('/api/auth/google',{
-       method: 'POST',
-       headers: {
-         'Content-Type':"application/json",
-       },
-       body: JSON.stringify({ name: result.user.displayName, email: result.user.email, phto: result.user.photoURL })
-     })
-     const data = await res.json()
-     dispatch(signInSuccess(data));
-     navigate('/');
-   } catch (error) {
-     console.log("could not sign in with google", error);
-   }
- }
+    try {
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth(app);
 
+      const result = await signInWithPopup(auth, provider);
+
+      const res = await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: result.user.displayName,
+          email: result.user.email,
+          photoURL: result.user.photoURL,
+        }),
+      });
+      const data = await res.json();
+      dispatch(signInSuccess(data));
+      navigate('/');
+    } catch (error) {
+      console.log('could not sign in with google', error);
+    }
+  };
   return (
     <button onClick={handleGoogleClick} type='button' className="w-full shadow-xl py-2 px-4 text-sm text-white font-semibold rounded-md bg-red-500 hover:bg-red-600 focus:outline-none">Continue With Google</button>
   )
