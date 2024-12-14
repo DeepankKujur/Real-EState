@@ -10,7 +10,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Listing from './pages/Listing';
 import CreateListing from './pages/CreateListing';
 import Search from './pages/Search';
-
+  
 
 
 
