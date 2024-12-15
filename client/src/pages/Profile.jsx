@@ -1,23 +1,88 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { deleteUserFailure, deleteUserStart, deleteUserSuccess, updateUserStart, updateUserSuccess, updateuserFailure } from '../redux/user/userSlice';
+import { useDispatch } from 'react-redux';
 
-export default function SignIn() {
+
+export default function Profile() {
+  const { currentUser,loading,error} = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({});
+  const [updateSucccess, setUpdateSuccess] = useState(false);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(updateUserStart());
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+// in this step we are sending data to backend and in response we Converts the response from the backend into a JavaScript object. and then use this data to the frontend 
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(updateuserFailure(data.message));
+        return;
+      }
+      dispatch(updateUserSuccess(data));
+      setUpdateSuccess(true);
+
+    } catch (error) {
+      dispatch(updateuserFailure(error.message));
+    }
+ }
+
+  
+  const handleDeleteUser =async () => {
+     try {
+       dispatch(deleteUserStart());
+       const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+         method: 'DELETE',
+       });
+       const data = await res.json();
+       if (data.success === false) {
+         dispatch(deleteUserFailure(data.message));
+         return;
+       }
+       dispatch(deleteUserSuccess(data));
+     } catch (error) {
+       dispatch(deleteUserFailure(error.message));
+     }
+   }
+  
   return (
-    <div className="font-[sans-serif] bg-gray-400 min-h-screen flex justify-center items-center p-4">
-      <div className="bg-gray-200 p-10 rounded-lg shadow-lg w-full max-w-3xl flex justify-center items-center mt-[-70px]"> {/* Added negative margin-top */}
-        <form className="w-full max-w-lg">
+    <div className="font-[sans-serif] bg-gray-400 min-h-screen flex justify-center items-center p-4 ">
+      <div className="bg-gray-200 p-10 rounded-lg shadow-lg w-full  max-w-3xl flex justify-center items-center ">
+        <form onSubmit={handleSubmit} className="w-full max-w-lg">
           <div className="mb-6 text-center">
             <h3 className="text-xl font-bold text-black">Profile</h3> {/* Fixed typo 'text-blacl-400' to 'text-black' */}
           </div>
+          <div className="flex justify-center items-center mt-2">
+           
+            <img
+    src={currentUser.avatar}
+    alt="profile"
+    className="rounded-full h-28 w-28 object-cover cursor-pointer"
+  />
+</div>
 
           {/* Full Name Field */}
           <div>
-            <label className="text-black text-xs block mb-1">Full Name</label>
+            <label className="text-black text-xs block mb-1">UserName</label>
             <div className="relative flex items-center">
               <input
-                name="name"
+                name="userName"
                 type="text"
-                required
+                id='username'
+                onChange={handleChange}
+                defaultValue={currentUser.username}
                 className="w-full bg-transparent text-sm text-black border-b border-gray-300 focus:border-yellow-400 px-2 py-2 outline-none"
                 placeholder="Enter name"
               />
@@ -35,7 +100,9 @@ export default function SignIn() {
               <input
                 name="email"
                 type="text"
-                required
+                id='email'
+                onChange={handleChange}
+                defaultValue={currentUser.email}
                 className="w-full bg-transparent text-sm text-black border-b border-gray-300 focus:border-yellow-400 px-2 py-2 outline-none"
                 placeholder="Enter email"
               />
@@ -52,7 +119,8 @@ export default function SignIn() {
               <input
                 name="password"
                 type="password"
-                required
+                id='password'
+                onChange={handleChange}
                 className="w-full bg-transparent text-sm text-black border-b border-gray-300 focus:border-yellow-400 px-2 py-2 outline-none"
                 placeholder="Enter password"
               />
@@ -66,10 +134,11 @@ export default function SignIn() {
           <div className="mt-8 flex flex-col gap-4">
             {/* Update Button */}
             <button
-              type="button"
+              disabled={loading}
+              type="submit"
               className="w-full py-2 px-4 text-sm text-white font-semibold rounded-md bg-gray-700 hover:bg-gray-800 focus:outline-none"
             >
-              Update
+            {loading? 'Loading...':'Update'}
             </button>
             {/* Create Listing Button */}
             <Link to="/create-listing"
@@ -80,9 +149,11 @@ export default function SignIn() {
             </Link>
             {/* Additional Links */}
             <div className="flex justify-between text-sm mt-4">
-              <span className="text-gray-500 cursor-pointer hover:text-gray-700">Delete Account</span>
+              <span onClick={handleDeleteUser} className="text-gray-500 cursor-pointer hover:text-gray-700">Delete Account</span>
               <span className="text-gray-500 cursor-pointer hover:text-gray-700">Sign Out</span>
             </div>
+            <p className='text-red-700 mt-5'>{ error?error:''}</p>
+            <p className='text-green-700 mt-5'>{ updateSucccess?'User is updated successfully':''}</p>
           </div>
         </form>
       </div>
