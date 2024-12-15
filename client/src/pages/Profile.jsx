@@ -1,12 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { updateUserStart, updateUserSuccess, updateuserFailure } from '../redux/user/userSlice';
+import { useDispatch } from 'react-redux';
+
 
 export default function Profile() {
-  const {currentUser} =useSelector((state)=>state.user)
+  const { currentUser,loading,error} = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({});
+  const [updateSucccess, setUpdateSuccess] = useState(false);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(updateUserStart());
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(updateuserFailure(data.message));
+        return;
+      }
+      dispatch(updateUserSuccess(data));
+      setUpdateSuccess(true);
+
+    } catch (error) {
+      dispatch(updateuserFailure(error.message));
+    }
+ }
+
   return (
     <div className="font-[sans-serif] bg-gray-400 min-h-screen flex justify-center items-center p-4 ">
       <div className="bg-gray-200 p-10 rounded-lg shadow-lg w-full  max-w-3xl flex justify-center items-center ">
-        <form className="w-full max-w-lg">
+        <form onSubmit={handleSubmit} className="w-full max-w-lg">
           <div className="mb-6 text-center">
             <h3 className="text-xl font-bold text-black">Profile</h3> {/* Fixed typo 'text-blacl-400' to 'text-black' */}
           </div>
@@ -26,7 +62,9 @@ export default function Profile() {
               <input
                 name="userName"
                 type="text"
-                required
+                id='username'
+                onChange={handleChange}
+                defaultValue={currentUser.username}
                 className="w-full bg-transparent text-sm text-black border-b border-gray-300 focus:border-yellow-400 px-2 py-2 outline-none"
                 placeholder="Enter name"
               />
@@ -44,7 +82,9 @@ export default function Profile() {
               <input
                 name="email"
                 type="text"
-                required
+                id='email'
+                onChange={handleChange}
+                defaultValue={currentUser.email}
                 className="w-full bg-transparent text-sm text-black border-b border-gray-300 focus:border-yellow-400 px-2 py-2 outline-none"
                 placeholder="Enter email"
               />
@@ -61,7 +101,8 @@ export default function Profile() {
               <input
                 name="password"
                 type="password"
-                required
+                id='password'
+                onChange={handleChange}
                 className="w-full bg-transparent text-sm text-black border-b border-gray-300 focus:border-yellow-400 px-2 py-2 outline-none"
                 placeholder="Enter password"
               />
@@ -75,10 +116,11 @@ export default function Profile() {
           <div className="mt-8 flex flex-col gap-4">
             {/* Update Button */}
             <button
-              type="button"
+              disabled={loading}
+              type="submit"
               className="w-full py-2 px-4 text-sm text-white font-semibold rounded-md bg-gray-700 hover:bg-gray-800 focus:outline-none"
             >
-              Update
+            {loading? 'Loading...':'Update'}
             </button>
             {/* Create Listing Button */}
             <Link to="/create-listing"
@@ -92,6 +134,8 @@ export default function Profile() {
               <span className="text-gray-500 cursor-pointer hover:text-gray-700">Delete Account</span>
               <span className="text-gray-500 cursor-pointer hover:text-gray-700">Sign Out</span>
             </div>
+            <p className='text-red-700 mt-5'>{ error?error:''}</p>
+            <p className='text-red-700 mt-5'>{ updateSucccess?'user is updated successfully':''}</p>
           </div>
         </form>
       </div>
