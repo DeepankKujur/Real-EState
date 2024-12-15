@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updateUserStart, updateUserSuccess, updateuserFailure } from '../redux/user/userSlice';
+import { deleteUserFailure, deleteUserStart, deleteUserSuccess, updateUserStart, updateUserSuccess, updateuserFailure } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 
 
@@ -25,7 +25,7 @@ export default function Profile() {
         },
         body: JSON.stringify(formData),
       });
-
+// in this step we are sending data to backend and in response we Converts the response from the backend into a JavaScript object. and then use this data to the frontend 
       const data = await res.json();
       if (data.success === false) {
         dispatch(updateuserFailure(data.message));
@@ -39,6 +39,24 @@ export default function Profile() {
     }
  }
 
+  
+  const handleDeleteUser =async () => {
+     try {
+       dispatch(deleteUserStart());
+       const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+         method: 'DELETE',
+       });
+       const data = await res.json();
+       if (data.success === false) {
+         dispatch(deleteUserFailure(data.message));
+         return;
+       }
+       dispatch(deleteUserSuccess(data));
+     } catch (error) {
+       dispatch(deleteUserFailure(error.message));
+     }
+   }
+  
   return (
     <div className="font-[sans-serif] bg-gray-400 min-h-screen flex justify-center items-center p-4 ">
       <div className="bg-gray-200 p-10 rounded-lg shadow-lg w-full  max-w-3xl flex justify-center items-center ">
@@ -131,11 +149,11 @@ export default function Profile() {
             </Link>
             {/* Additional Links */}
             <div className="flex justify-between text-sm mt-4">
-              <span className="text-gray-500 cursor-pointer hover:text-gray-700">Delete Account</span>
+              <span onClick={handleDeleteUser} className="text-gray-500 cursor-pointer hover:text-gray-700">Delete Account</span>
               <span className="text-gray-500 cursor-pointer hover:text-gray-700">Sign Out</span>
             </div>
             <p className='text-red-700 mt-5'>{ error?error:''}</p>
-            <p className='text-red-700 mt-5'>{ updateSucccess?'user is updated successfully':''}</p>
+            <p className='text-green-700 mt-5'>{ updateSucccess?'User is updated successfully':''}</p>
           </div>
         </form>
       </div>
