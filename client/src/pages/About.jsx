@@ -19,7 +19,7 @@ const About = () => {
             <h2 className="text-4xl font-semibold text-gray-900 mb-6">About Us</h2>
             <div className="text-lg text-gray-700 space-y-6">
               <p>
-                At <span className="font-bold text-teal-600">GD-Groups</span>, we are
+                At <span className="font-bold text-blue-600">GD-Groups</span>, we are
                 dedicated to helping you find the ideal rental property that complements your
                 lifestyle. Whether you're looking for a spacious house, a cozy apartment, or
                 a short-term stay, we simplify your search with our seamless and efficient
@@ -28,11 +28,11 @@ const About = () => {
               <p>
                 Our diverse collection of rental properties is designed to suit various
                 preferences and budgets. From{" "}
-                <span className="font-medium text-teal-600">single-bedroom apartments</span> to{" "}
-                <span className="font-medium text-teal-600">luxurious family homes</span>, we ensure that
+                <span className="font-medium text-blue-600">single-bedroom apartments</span> to{" "}
+                <span className="font-medium text-blue-600">luxurious family homes</span>, we ensure that
                 you’ll find a place that feels like home.
               </p>
-              <div className="bg-teal-50 border-l-4 border-teal-600 p-4 italic text-gray-600 rounded-md">
+              <div className="bg-teal-50 border-l-4 border-blue-600 p-4 italic text-black rounded-md">
                 <p>
                   "At GD-Groups, your dream home is just a click away. Our mission is to make
                   renting effortless and enjoyable."
