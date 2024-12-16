@@ -61,7 +61,7 @@ function Header() {
                         ) : (
                             <li>
                                 <button
-                                    className="text-lg text-white bg-blue-500 rounded-full px-4 py-1.5 outline outline-1 outline-blue-300 transition duration-300 hover:bg-blue-600 hover:outline-blue-400 focus:outline-none"
+                                    className="text-lg text-white bg-slate-800 rounded-full px-4 py-1.5 outline outline-1 outline-blue-300 transition duration-300 hover:bg-blue-600 hover:outline-blue-400 focus:outline-none"
                                 >
                                     Sign in
                                 </button>
