@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -13,11 +13,53 @@ import {
   updateuserFailure,
 } from '../redux/user/userSlice';
 
+import axios from 'axios';
+
 export default function Profile() {
+  const fileRef = useRef(null);
+  const [file, setFile] = useState(undefined);
+  const [imageUrl, setImageUrl] = useState('');
+  console.log(imageUrl)
+  console.log(file)
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({});
   const [updateSucccess, setUpdateSuccess] = useState(false);
+
+ 
+  useEffect(() => {
+    if (file) {
+      handleFileUpload(file);
+    }
+  }, [file]);
+  
+
+  const handleFileUpload =async (file) => {
+    try {
+      const form = new FormData();
+      form.append('file', file);
+      const res = await axios.post('http://localhost:3000/upload', form, {
+        headers: {
+          'Content-Type': 'multipart/form-data' 
+          
+        },
+      })
+      const uploadedImageUrl = res.data.fileUrl; 
+      setImageUrl(uploadedImageUrl); 
+      setFormData(prevData => ({
+        ...prevData,
+        avatar: uploadedImageUrl
+      }));
+    } catch (error) {
+     console.log(error) 
+    }
+  }
+
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+}
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -82,8 +124,11 @@ export default function Profile() {
             <h3 className="text-2xl font-bold text-gray-800">Profile</h3>
           </div>
           <div className="flex justify-center items-center mt-2">
+
+            <input onChange={handleFileChange}  type="file" ref={fileRef} hidden accept='image/*' />
             <img
-              src={currentUser.avatar}
+              onClick={()=>fileRef.current.click()}
+              src={imageUrl||currentUser.avatar}
               alt="profile"
               className="rounded-full h-28 w-28 object-cover cursor-pointer border-4 border-gray-300 shadow-md"
             />

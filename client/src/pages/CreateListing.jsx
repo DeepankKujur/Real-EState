@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function CreateListing() {
+
+    const [files, setFiles] = useState([]);
     return (
-        <main className="p-3 max-w-4xl bg-gray-300 rounded-lg shadow-lg mx-auto mt-20">
+        <main className="p-3 max-w-4xl bg-gray-400 rounded-lg shadow-lg mx-auto mt-20 mb-20">
             <h1 className="text-3xl font-semibold text-center my-7">Create a Listing</h1>
             <form className="flex flex-col sm:flex-row gap-4">
                 <div className="flex flex-col gap-4 flex-1">
@@ -116,6 +118,7 @@ export default function CreateListing() {
                     </p>
                     <div className="flex gap-4">
                         <input
+                            onChange={(e)=>setFiles(e.target.files)}
                             className="p-3 border border-gray-300 rounded w-full"
                             type="file"
                             id="images"

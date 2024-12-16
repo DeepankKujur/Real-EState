@@ -7,7 +7,9 @@ const router = express.Router();
 
 router.get('/test', test);
 router.post('/update/:id',verifyToken ,updateUser)
-router.delete('/delete/:id',verifyToken ,deleteUser)
+router.delete('/delete/:id', verifyToken, deleteUser)
+
+
 
 export default router;
 //when we export something as default then we can change the name while keeping the address same while importing it
