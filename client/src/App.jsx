@@ -10,6 +10,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Listing from './pages/Listing';
 import CreateListing from './pages/CreateListing';
 import Search from './pages/Search';
+import Footer from './components/Footer';
   
 
 
@@ -32,6 +33,7 @@ export default function App() {
           <Route path='/profile' element={<Profile/>} />  
           </Route>
       </Routes>
+      <Footer/>
     </BrowserRouter>
   )
 }
