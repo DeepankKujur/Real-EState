@@ -25,7 +25,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:5173', // Replace with the actual URL of your frontend
+  origin: 'http://localhost:5173',
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
 }));
@@ -39,8 +39,10 @@ const __dirname = path.dirname(__filename);
 
 // Serve static files
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+app.use('/uploads1', express.static(path.join(__dirname, '../uploads1')));
 
-// Multer setup
+
+// Multer setup for single file
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
@@ -61,6 +63,31 @@ app.post('/upload', upload.single('file'), (req, res) => {
 });
 
 
+
+
+//multer setup for  multiple file
+const storage1 = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads1/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+})
+
+const upload1 = multer({ storage: storage1 });
+
+app.post('/uploadfiles', upload1.array('files', 6), (req, res) => {
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).json({ success: false, message: "No files uploaded" });
+  }
+
+  // Generate URLs for all uploaded files
+  const fileUrls = req.files.map(file => `http://localhost:3000/uploads1/${file.filename}`);
+  
+  res.json({ success: true, fileUrls });
+});
+ 
 
 
 app.listen(3000, () => {
