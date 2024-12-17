@@ -131,6 +131,25 @@ export default function Profile() {
     }
   };
 
+  const handleListingDelete = async (listingId) => {
+    try {
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div className="font-[sans-serif] bg-gradient-to-r from-gray-200 to-gray-700 min-h-screen flex justify-center items-center p-4">
       <div className="bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 p-10 rounded-lg shadow-2xl w-full max-w-3xl flex justify-center items-center">
@@ -271,7 +290,8 @@ export default function Profile() {
                     <p>{listing.name}</p>
                   </Link>
                   <div className='flex flex-col item-center'>
-                  <button
+                      <button
+                        type="button"
     onClick={() => handleListingDelete(listing._id)}
     className="w-32 mb-1 text-white bg-red-500 hover:bg-red-600 uppercase font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
   >
@@ -279,7 +299,8 @@ export default function Profile() {
   </button>
 
                     <Link to={`/update-listing/${listing._id}`}>
-                    <button
+                        <button
+                          type="button"
     className="w-32 text-white bg-green-500 hover:bg-green-600 uppercase font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
   >
     Edit
