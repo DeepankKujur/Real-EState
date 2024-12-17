@@ -31,7 +31,7 @@ export default function Home() {
     <div className="text-center mt-8">
       <Link
         to="/search"
-        className="px-8 py-3 text-lg text-blue-700 bg-white font-bold rounded-lg shadow-xl hover:bg-blue-300 hover:shadow-2xl transition duration-300 ease-in-out transform hover:scale-105"
+        className="px-8 py-3 text-lg text-blue-700 bg-white font-bold rounded-lg shadow-xl hover:bg-gray-200 hover:shadow-2xl transition duration-300 ease-in-out transform hover:scale-105"
       >
         Start Your Search
       </Link>
