@@ -100,6 +100,7 @@ app.use("/api/auth", authRouter);
 app.use('/api/listing', listingRouter);
 
 app.use((err, req, res, next) => {
+  
   const statusCode = err.statusCode || 500;
   const message = err.message || "internal server error";
   return res.status(statusCode).json({
@@ -108,3 +109,17 @@ app.use((err, req, res, next) => {
     message,
   })
 })
+// app.use((err, req, res, next) => {
+//   console.error("Error details: ", err); // Logs the error details
+//   const statusCode = err.statusCode || 500;
+//   const message = err.message || "Internal Server Error";
+  
+//   // Log the full error stack
+//   console.error(err.stack);
+
+//   return res.status(statusCode).json({
+//     success: false,
+//     statusCode,
+//     message,
+//   });
+// });
