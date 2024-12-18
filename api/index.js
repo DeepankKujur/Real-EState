@@ -32,7 +32,7 @@ app.use(cors({
 
 //this will allow json as the input to the server
 
-// const __dirname1 = path.resolve();
+const __dirname1 = path.resolve();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -99,10 +99,11 @@ app.use('/api/user', userRouter);
 app.use("/api/auth", authRouter);
 app.use('/api/listing', listingRouter);
 
-// app.use(express.static(path.join(__dirname1, '/client/build/dist')));
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname1, 'client', 'dist', 'index.html'));
-// })
+app.use(express.static(path.join(__dirname1, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname1, 'client', 'dist', 'index.html'));
+})
 
 app.use((err, req, res, next) => {
   
