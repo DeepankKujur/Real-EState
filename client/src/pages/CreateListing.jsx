@@ -96,9 +96,9 @@ export default function CreateListing() {
     }
 
     if (
-      e.target.type === "number" ||
       e.target.type === "text" ||
-      e.target.type === "textarea"
+      e.target.id === "regularPrice" || 
+     e.target.id === "discountPrice"
     ) {
       setFormDatas({
         ...formDatas,
@@ -263,7 +263,7 @@ export default function CreateListing() {
             <div className="flex items-center gap-2">
               <input
                 type="number"
-                id="regular-price"
+                id="regularPrice"
                 min="50"
                 max="1000000"
                 required
@@ -282,7 +282,7 @@ export default function CreateListing() {
               <div className="flex items-center gap-2">
                 <input
                   type="number"
-                  id="discount-price"
+                  id="discountPrice"
                   min="0"
                   max="1000000"
                   required
