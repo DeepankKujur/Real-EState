@@ -119,7 +119,7 @@ export default function Profile() {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const res = await fetch(`/api/user/listings/${currentUser._id}`); // error in this line
       const data = await res.json();
       if (data.success === false) {
         setShowListingsError(true);
@@ -263,12 +263,12 @@ export default function Profile() {
               {updateSucccess ? "User is updated successfully" : ""}
             </p>
             <button
-  type="button"
-  onClick={handleShowListings}
-  className="w-full py-2 px-4 text-sm text-white font-semibold rounded-md bg-green-500 hover:bg-green-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 transition-all duration-300"
->
-  Show Listings
-</button>
+              type="button"
+              onClick={handleShowListings}
+              className="w-full py-2 px-4 text-sm text-white font-semibold rounded-md bg-green-500 hover:bg-green-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 transition-all duration-300"
+            >
+              Show Listings
+            </button>
 
             <p className="text-green-700 mt-3">
               {showListingsError ? "Error showing listing" : ""}
@@ -276,39 +276,39 @@ export default function Profile() {
 
             {userListings &&
               userListings.length > 0 &&
-              <div  className='flex flex-col gap-4'>
+              <div className='flex flex-col gap-4'>
                 <h1 className="text-center mt-3 mb-6 text-3xl font-bold text-gray-800 tracking-wide capitalize">
-  Your Listings
-</h1>
+                  Your Listings
+                </h1>
 
-                { userListings.map((listing) => (
-                <div key={listing._id} className="border bg-slate-400 rounded-lg p-3 flex justify-between items-center gap-4">
-                  <Link to={`/listings/${listing._id}`}>
-                    <img src={listing.imageUrls[0]} alt="listing cover" className="h-16 w-16 object-contain " />
-                  </Link>
-                  <Link className="flex-1 text-slate-700 font-semibold hover:underline truncate " to={`/listings/${listing._id}`}>
-                    <p>{listing.name}</p>
-                  </Link>
-                  <div className='flex flex-col item-center'>
+                {userListings.map((listing) => (
+                  <div key={listing._id} className="border bg-slate-400 rounded-lg p-3 flex justify-between items-center gap-4">
+                    <Link to={`/listings/${listing._id}`}>
+                      <img src={listing.imageUrls[0]} alt="listing cover" className="h-16 w-16 object-contain " />
+                    </Link>
+                    <Link className="flex-1 text-slate-700 font-semibold hover:underline truncate " to={`/listings/${listing._id}`}>
+                      <p>{listing.name}</p>
+                    </Link>
+                    <div className='flex flex-col item-center'>
                       <button
                         type="button"
-    onClick={() => handleListingDelete(listing._id)}
-    className="w-32 mb-1 text-white bg-red-500 hover:bg-red-600 uppercase font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
-  >
-    Delete
-  </button>
+                        onClick={() => handleListingDelete(listing._id)}
+                        className="w-32 mb-1 text-white bg-red-500 hover:bg-red-600 uppercase font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
+                      >
+                        Delete
+                      </button>
 
-                    <Link to={`/update-listing/${listing._id}`}>
+                      <Link to={`/update-listing/${listing._id}`}>
                         <button
                           type="button"
-    className="w-32 text-white bg-green-500 hover:bg-green-600 uppercase font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
-  >
-    Edit
-  </button>
+                          className="w-32 text-white bg-green-500 hover:bg-green-600 uppercase font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
+                        >
+                          Edit
+                        </button>
 
-                    </Link>
+                      </Link>
+                    </div>
                   </div>
-                </div>
                 ))}
               </div>
             }
