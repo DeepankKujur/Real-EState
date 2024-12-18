@@ -2,6 +2,8 @@ import bcryptjs from "bcryptjs"
 import User from "../models/user.model.js";
 import { errorHandler } from "../utils/error.js";
 import Listing from "../models/listing.model.js";
+import { sendMail } from "../utils/sendMail.js";
+
 
 export const test = (req, res) => {
   res.json({
@@ -70,4 +72,11 @@ export const getUser = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+}
+
+
+export const userFeedback = (req,res,next) => {
+  const { name, email, message } = req.body;
+  sendMail(email, `Thanks for  your Feedback`, `Hi ,${name} This is your feedback:- ${message}`);
+  res.status(201).json("Feedback sent successfully");
 }
