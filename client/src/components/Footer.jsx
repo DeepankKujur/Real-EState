@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 export default function Footer() {
   return (
     <footer className="py-8 bg-gradient-to-r from-gray-800 to-gray-900 text-center">
-      <div className="text-lg font-medium mb-4 text-white">Connect with us:</div>
-      <div className="flex justify-center gap-6 mb-4">
+    <div className="text-lg font-medium mb-4 text-white"><Link to="/connectus" className='text-yellow-900'>Connect with us:</Link></div>
+    <div className="flex justify-center gap-6 mb-4">
         {/* Instagram */}
         <a
           href="https://www.instagram.com"

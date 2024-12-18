@@ -13,6 +13,7 @@ import Search from './pages/Search';
 import Footer from './components/Footer';
 import TermsAndCondition from './pages/TermsAndCondition';
 import UpdateListing from './pages/UpdateListing';
+import ConnectUs from './pages/ConnectUs';
   
 
 
@@ -28,6 +29,7 @@ export default function App() {
       <Route path='/sign-up' element={<SignOut/>} />  
       <Route path='/search' element={<Search/>} />  
       <Route path='/about' element={<About/>} />  
+      <Route path='/connectus' element={<ConnectUs/>} /> 
       <Route path='/listing/:listingId'  element={<Listing/>} />   
       <Route path='/about' element={<About />} />  
       <Route path='/termsandcondition' element={<TermsAndCondition/>} />  
