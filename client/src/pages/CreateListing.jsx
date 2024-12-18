@@ -98,7 +98,8 @@ export default function CreateListing() {
     if (
       e.target.type === "text" ||
       e.target.id === "regularPrice" || 
-     e.target.id === "discountPrice"
+      e.target.id === "discountPrice" ||
+      e.target.type === "number"
     ) {
       setFormDatas({
         ...formDatas,
