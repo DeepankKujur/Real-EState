@@ -58,7 +58,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ success: false, message: "No file uploaded" });
   }
-  const fileUrl = `http://localhost:3000/uploads/${req.file.filename}`;
+  const fileUrl = `https://real-estate-o6kv.onrender.com/uploads/${req.file.filename}`;
   res.json({ success: true, fileUrl });
 });
 
@@ -83,7 +83,7 @@ app.post('/uploadfiles', upload1.array('files', 6), (req, res) => {
   }
 
   // Generate URLs for all uploaded files
-  const fileUrls = req.files.map(file => `http://localhost:3000/uploads1/${file.filename}`);
+  const fileUrls = req.files.map(file => `https://real-estate-o6kv.onrender.com/uploads1/${file.filename}`);
   
   res.json({ success: true, fileUrls });
 });

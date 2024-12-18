@@ -39,7 +39,7 @@ export default function Profile() {
     try {
       const form = new FormData();
       form.append("file", file);
-      const res = await axios.post("http://localhost:3000/upload", form, {
+      const res = await axios.post("https://real-estate-o6kv.onrender.com/upload", form, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
