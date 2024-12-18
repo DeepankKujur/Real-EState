@@ -3,7 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom"
 
-export default function CreateListing() {
+export default function UpdateListing() {
     const { currentUser } = useSelector((state) => state.user);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const navigate = useNavigate();
