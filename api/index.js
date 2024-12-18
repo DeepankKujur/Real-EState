@@ -32,8 +32,8 @@ app.use(cors({
 
 //this will allow json as the input to the server
 
+// const __dirname1 = path.resolve();
 
-// Define __dirname manually
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -99,6 +99,11 @@ app.use('/api/user', userRouter);
 app.use("/api/auth", authRouter);
 app.use('/api/listing', listingRouter);
 
+// app.use(express.static(path.join(__dirname1, '/client/build/dist')));
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname1, 'client', 'dist', 'index.html'));
+// })
+
 app.use((err, req, res, next) => {
   
   const statusCode = err.statusCode || 500;
@@ -109,17 +114,3 @@ app.use((err, req, res, next) => {
     message,
   })
 })
-// app.use((err, req, res, next) => {
-//   console.error("Error details: ", err); // Logs the error details
-//   const statusCode = err.statusCode || 500;
-//   const message = err.message || "Internal Server Error";
-  
-//   // Log the full error stack
-//   console.error(err.stack);
-
-//   return res.status(statusCode).json({
-//     success: false,
-//     statusCode,
-//     message,
-//   });
-// });
