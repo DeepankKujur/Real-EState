@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import darkimage from "../assets/img.jpeg";
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from 'swiper/modules';
 import SwiperCore from "swiper";
@@ -53,11 +52,10 @@ export default function Home() {
   return (
     <div className="bg-gray-900 min-h-screen">
   {/* Header - Banner Section */}
-  <header className="relative text-center bg-gradient-to-r from-black via-black to-gray-900 text-white py-16 shadow-2xl overflow-hidden">
+  <header className="relative text-center bg-gradient-to-r from-gray-700 via-black to-gray-700 text-white py-16 shadow-2xl overflow-hidden">
   {/* Background Image with animation */}
   <div
     className="absolute inset-0 bg-cover bg-center opacity-60 transform scale-105 animate-[zoom-in_15s_infinite]"
-    style={{ backgroundImage: `url(${darkimage})` }}
   ></div>
 
   <div className="relative z-10 px-5">
