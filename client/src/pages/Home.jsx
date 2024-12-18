@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import darkimage from "../assets/img.jpg";
+import darkimage from "../assets/img.jpeg";
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from 'swiper/modules';
 import SwiperCore from "swiper";
