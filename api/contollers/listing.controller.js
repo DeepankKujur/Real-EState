@@ -59,7 +59,10 @@ export const updateListing = async (req, res, next) => {
   }
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 export const getListing = async (req, res, next) => {
   try {
     const listing = await Listing.findById(req.params.id);
