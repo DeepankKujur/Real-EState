@@ -6,6 +6,7 @@ import { Navigation } from 'swiper/modules';
 import SwiperCore from "swiper";
 import 'swiper/css/bundle';
 import ListingItem from "../components/ListingItem";
+// import ListingItem from "../components/ListingItem";
 
 
 export default function Home() {
