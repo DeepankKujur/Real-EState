@@ -52,6 +52,9 @@ export default function Footer() {
     <p className="text-gray-300 text-sm">
       © 2024 <span className="font-bold">GD-Groups</span>. All Rights Reserved.
     </p>
+    <p className='text-yellow-500 text-sm'>
+     <Link to="/termsandcondition"> Terms and conditions</Link>
+    </p>
   </footer>
   )
 }
