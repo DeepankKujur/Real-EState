@@ -10,7 +10,7 @@
 
 
 // export default function SignIn() {
-   
+
 //     const [formData, setFormData] = useState({});
 //     const { loading, error } = useSelector((state) => state.user);
 //     //here state in the function means global state which is coming from the store
@@ -22,7 +22,7 @@
 //             ...formData, [e.target.id]: e.target.value,
 //         })
 //     };
-    
+
 //     const handleSubmit =async (e) => {
 //         e.preventDefault();
 //         try {
@@ -43,7 +43,7 @@
 //             }
 //             dispatch(signInSuccess(data));
 //             navigate('/')
-            
+
 //         } catch (error) {
 //             dispatch(signInFailure(error, message));
 //         }
@@ -233,7 +233,7 @@ export default function SignIn() {
                                 className="h-4 w-4 text-yellow-500"
                             />
                             <label htmlFor="remember-me" className="ml-2 text-xs text-white">
-                                I accept the <a href="#" className="text-yellow-400 hover:underline">Terms and Conditions</a>
+                                I accept the <a href="#" className="text-yellow-400 hover:underline"><Link to="/termsandcondition"> Terms and Conditions</Link></a>
                             </label>
                         </div>
 

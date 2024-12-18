@@ -265,7 +265,9 @@ export default function SignOut() {
                                 className="h-4 w-4 text-yellow-500"
                             />
                             <label htmlFor="remember-me" className="ml-2 text-xs text-white">
-                                I accept the <a href="#" className="text-yellow-400 hover:underline">Terms and Conditions</a>
+                                I accept the <a href="#" className="text-yellow-400 hover:underline">
+                                   <Link to="/termsandcondition"> Terms and Conditions</Link>
+                                    </a>
                             </label>
                         </div>
 
@@ -284,8 +286,8 @@ export default function SignOut() {
                         <OAuth />
 
                         {/* Sign-In Link */}
-                        <div className="text-center text-xs text-white">
-                            <p>
+                        <div className="text-center text-xs text-white mt-4">
+                            <p className=''>
                                 Already have an account? <Link to="/sign-in" className="text-yellow-400 hover:underline">Sign-In</Link>
                             </p>
                         </div>
