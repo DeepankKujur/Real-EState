@@ -4,114 +4,114 @@ import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
 import listingRouter from "./routes/listing.route.js";
-import cookieParser from 'cookie-parser'
-import { fileURLToPath } from "url";
+import cookieParser from "cookie-parser";
 import multer from "multer";
 import path from "path";
 import cors from "cors";
+import cloudinary from "cloudinary";
+import { fileURLToPath } from "url";
 
-
-//here we are configuring the dotenv package and connecting to the database
+// Configure dotenv and MongoDB connection
 dotenv.config();
-mongoose.connect(process.env.MONGO).then(() => {
-  console.log("connected to database");
-}).catch((err) => {
-  console.log(err);
+mongoose
+  .connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to database"))
+  .catch((err) => console.error("Database connection error:", err));
+
+// Configure Cloudinary
+cloudinary.v2.config({
+  cloud_name: process.env.Cloud_Name,
+  api_key: process.env.Cloud_Api,
+  api_secret: process.env.Cloud_Secret,
 });
 
-
-//here we have created the server
+// Initialize Express app
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-  origin: 'http://localhost:5173',
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type']
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
-//this will allow json as the input to the server
-
-const __dirname1 = path.resolve();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Serve static files
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
-app.use('/uploads1', express.static(path.join(__dirname, '../uploads1')));
-
-
-// Multer setup for single file
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
+// Multer setup for in-memory storage
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-// File upload endpoint
-app.post('/upload', upload.single('file'), (req, res) => {
+// Cloudinary single file upload endpoint
+app.post("/upload", upload.single("file"), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ success: false, message: "No file uploaded" });
   }
-  const fileUrl = `https://real-estate-o6kv.onrender.com/uploads/${req.file.filename}`;
-  res.json({ success: true, fileUrl });
+
+  const uploadStream = cloudinary.v2.uploader.upload_stream(
+    { folder: "real-estate-listings" },
+    (error, result) => {
+      console.log(result)
+      if (error) {
+        return res.status(500).json({ success: false, message: error.message });
+      }
+      res.json({ success: true, fileUrl: result.secure_url });
+    }
+  );
+    
+  uploadStream.end(req.file.buffer);
 });
 
-
-
-
-//multer setup for  multiple file
-const storage1 = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads1/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  }
-})
-
-const upload1 = multer({ storage: storage1 });
-
-app.post('/uploadfiles', upload1.array('files', 6), (req, res) => {
+// Cloudinary multiple file upload endpoint
+app.post("/uploadfiles", upload.array("files", 6), async (req, res) => {
   if (!req.files || req.files.length === 0) {
     return res.status(400).json({ success: false, message: "No files uploaded" });
   }
 
-  // Generate URLs for all uploaded files
-  const fileUrls = req.files.map(file => `https://real-estate-o6kv.onrender.com/uploads1/${file.filename}`);
-  
-  res.json({ success: true, fileUrls });
+  try {
+    const uploadPromises = req.files.map(
+      (file) =>
+        new Promise((resolve, reject) => {
+          const uploadStream = cloudinary.v2.uploader.upload_stream(
+            { folder: "real-estate-listings" },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result.secure_url);
+            }
+          );
+          uploadStream.end(file.buffer);
+        })
+    );
+
+    const fileUrls = await Promise.all(uploadPromises);
+    res.json({ success: true, fileUrls });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 });
- 
 
-
-app.listen(3000, () => {
-  console.log("server is running on port 3000 ");
-});
-
-
-app.use('/api/user', userRouter);
+// API Routes
+app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
-app.use('/api/listing', listingRouter);
+app.use("/api/listing", listingRouter);
 
-app.use(express.static(path.join(__dirname1, '/client/dist')));
+// Serve static files
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "client/dist")));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname1, 'client', 'dist', 'index.html'));
-})
+// Wildcard route for SPA
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
+// Error handling middleware
 app.use((err, req, res, next) => {
-  
   const statusCode = err.statusCode || 500;
-  const message = err.message || "internal server error";
-  return res.status(statusCode).json({
-    success: false,
-    statusCode,
-    message,
-  })
-})
+  const message = err.message || "Internal server error";
+  res.status(statusCode).json({ success: false, statusCode, message });
+});
+
+// Start the server
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

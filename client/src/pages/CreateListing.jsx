@@ -47,10 +47,10 @@ export default function CreateListing() {
       const formData = new FormData();
       Array.from(selectedFiles).forEach((file) => {
         formData.append("files", file);
-      });
+      }); 
 
       const res = await axios.post(
-        "https://real-estate-o6kv.onrender.com/uploadfiles",
+        "https://real-estate-o6kv.onrender.com//uploadfiles",
         formData,
         {
           headers: {
@@ -59,6 +59,7 @@ export default function CreateListing() {
         }
       );
       const uploadedImagesUrl = res.data.fileUrls;
+      
       setFormDatas({
         ...formDatas,
         imageUrls: [...formDatas.imageUrls, ...uploadedImagesUrl],
