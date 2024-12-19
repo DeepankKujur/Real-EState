@@ -14,9 +14,9 @@ import { fileURLToPath } from "url";
 // Configure dotenv and MongoDB connection
 dotenv.config();
 mongoose
-  .connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGO)
   .then(() => console.log("Connected to database"))
-  .catch((err) => console.error("Database connection error:", err));
+  .catch((err) => console.log(err));
 
 // Configure Cloudinary
 cloudinary.v2.config({

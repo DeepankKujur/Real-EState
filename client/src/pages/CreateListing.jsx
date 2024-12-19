@@ -50,7 +50,7 @@ export default function CreateListing() {
       }); 
 
       const res = await axios.post(
-        "https://real-estate-o6kv.onrender.com//uploadfiles",
+        "https://real-estate-o6kv.onrender.com/uploadfiles",
         formData,
         {
           headers: {
