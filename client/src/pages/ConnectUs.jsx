@@ -7,11 +7,11 @@ const ContactUs = () => {
   }, []);
   const users = [
     {
-      name: "Prabhas",
+      name: "Gaurav Singh",
       role: "full stack developer",
       description:
-        "A full-stack developer is a software professional with expertise in both front-end and back-end development, capable of designing, building, and maintaining fully functional web applications by working seamlessly across the entire technology stack, including user interfaces, server-side logic, and databases.",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsyKYseZHjheFo4OgbfSvGeGSurNZnQI64RQ&s",
+        " built RESTful APIs with Node.js, managed MongoDB, and developed responsive UIs using React. implemented JWT authentication, ensured smooth frontend-backend integration, and deployed the app using Render.followed best practices for security, version control, and performance while maintaining clean, modular, and scalable code.",
+      image: "https://lh3.googleusercontent.com/ogw/AF2bZyjcZCE0zxJXE0T69YE4SvAjNPN6sFpawofedr8biew6ySc=s64-c-mo",
       socials: {
         twitter: "https://twitter.com",
         linkedin: "https://linkedin.com",
@@ -20,11 +20,11 @@ const ContactUs = () => {
       },
     },
     {
-      name: "Yash",
+      name: "Deepank kujur",
       role: "Full Stack Developer",
       description:
-        "A full-stack developer is a software professional with expertise in both front-end and back-end development, capable of designing, building, and maintaining fully functional web applications by working seamlessly across the entire technology stack, including user interfaces, server-side logic, and databases.",
-      image: "https://wallpapers.com/images/hd/kgf-rocky-bhai-on-chair-g5a63tyd4dhy2d0x.jpg",
+        " built RESTful APIs with Node.js, managed MongoDB, and developed responsive UIs using React. followed best practices for version control, and performance while maintaining clean, modular, and scalable code.",
+      image: "https://media-del2-2.cdn.whatsapp.net/v/t61.24694-24/427980359_3795211080799759_997187017390890733_n.jpg?ccb=11-4&oh=01_Q5Aa1gFTvkXYWjzi_TOOTbVnAj7lKDHm19jW0nsdhWytK7cEeQ&oe=68327D7F&_nc_sid=5e03e0&_nc_cat=103",
       socials: {
         twitter: "https://twitter.com",
         linkedin: "https://linkedin.com",
@@ -69,7 +69,7 @@ const ContactUs = () => {
                 rel="noopener noreferrer"
                 className="text-blue-400 hover:text-blue-500 transition transform hover:scale-125"
               >
-                <FaTwitter size={50} />
+                <FaTwitter size={40} />
               </a>
               <a
                 href={user.socials.linkedin}
@@ -77,7 +77,7 @@ const ContactUs = () => {
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-700 transition transform hover:scale-125"
               >
-                <FaLinkedin size={50} />
+                <FaLinkedin size={40} />
               </a>
               <a
                 href={user.socials.github}
@@ -85,7 +85,7 @@ const ContactUs = () => {
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-gray-300 transition transform hover:scale-125"
               >
-                <FaGithub size={50} />
+                <FaGithub size={40} />
               </a>
               <a
                 href={user.socials.instagram}
@@ -93,7 +93,7 @@ const ContactUs = () => {
                 rel="noopener noreferrer"
                 className="text-pink-500 hover:text-pink-600 transition transform hover:scale-125"
               >
-                <FaInstagram size={50} />
+                <FaInstagram size={40} />
               </a>
             </div>
           </div>
