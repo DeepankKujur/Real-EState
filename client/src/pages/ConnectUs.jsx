@@ -2,6 +2,9 @@ import React from "react";
 import { FaTwitter, FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
 
 const ContactUs = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const users = [
     {
       name: "Prabhas",
