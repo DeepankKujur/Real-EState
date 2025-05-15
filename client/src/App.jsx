@@ -6,6 +6,7 @@ import SignOut from './pages/SignOut';
 import About from './pages/About';
 import Profile from './pages/Profile';
 import Header from './components/Header';
+import Chatbot from './components/Chatbot';
 import PrivateRoute from './components/PrivateRoute';
 import Listing from './pages/Listing';
 import CreateListing from './pages/CreateListing';
