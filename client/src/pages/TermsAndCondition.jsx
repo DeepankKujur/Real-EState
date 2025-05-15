@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const TermsAndConditions = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="bg-gray-700 min-h-screen py-12 px-6">
       <div className="max-w-4xl mx-auto bg-gray-300 shadow-xl p-8 rounded-lg border border-gray-300">
