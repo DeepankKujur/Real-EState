@@ -101,7 +101,7 @@ function Header() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="sm:hidden px-4 pb-4 flex flex-col gap-4 bg-gray-800 text-white">
+<div className="sm:hidden px-4 pb-4 flex flex-col gap-4 bg-gray-800 text-white items-center text-center">
           <form
             onSubmit={handleSubmit}
             className="bg-gray-700 p-2 rounded-full flex items-center shadow"
