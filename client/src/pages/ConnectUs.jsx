@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useEffect} from "react";
 import { FaTwitter, FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
 
 const ContactUs = () => {
