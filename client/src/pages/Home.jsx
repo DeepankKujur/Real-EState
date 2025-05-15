@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import darkimage from "../assets/img.jpg";
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from 'swiper/modules';
 import SwiperCore from "swiper";
 import 'swiper/css/bundle';
-import ListingItem from '../components/ListingItem';
+import Listingitem from "../components/Listingitem";
 
 
 export default function Home() {
@@ -53,11 +52,10 @@ export default function Home() {
   return (
     <div className="bg-gray-900 min-h-screen">
   {/* Header - Banner Section */}
-  <header className="relative text-center bg-gradient-to-r from-black via-black to-gray-900 text-white py-16 shadow-2xl overflow-hidden">
+  <header className="relative text-center bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white py-16 shadow-2xl overflow-hidden">
   {/* Background Image with animation */}
   <div
     className="absolute inset-0 bg-cover bg-center opacity-60 transform scale-105 animate-[zoom-in_15s_infinite]"
-    style={{ backgroundImage: `url(${darkimage})` }}
   ></div>
 
   <div className="relative z-10 px-5">
@@ -119,7 +117,7 @@ export default function Home() {
         </div>
         <div className="flex flex-wrap gap-4 justify-center mt-6">
           {offerListings.map((listing) => (
-            <ListingItem listing={listing} key={listing._id} />
+            <Listingitem listing={listing} key={listing._id} />
           ))}
         </div>
       </div>
@@ -135,7 +133,7 @@ export default function Home() {
         </div>
         <div className="flex flex-wrap gap-4 justify-center mt-6">
           {rentListings.map((listing) => (
-            <ListingItem listing={listing} key={listing._id} />
+            <Listingitem listing={listing} key={listing._id} />
           ))}
         </div>
       </div>
@@ -151,7 +149,7 @@ export default function Home() {
         </div>
         <div className="flex flex-wrap gap-4 justify-center mt-6">
           {saleListings.map((listing) => (
-            <ListingItem listing={listing} key={listing._id} />
+            <Listingitem listing={listing} key={listing._id} />
           ))}
         </div>
       </div>

@@ -47,10 +47,10 @@ export default function CreateListing() {
       const formData = new FormData();
       Array.from(selectedFiles).forEach((file) => {
         formData.append("files", file);
-      });
+      }); 
 
       const res = await axios.post(
-        "http://localhost:3000/uploadfiles",
+        "https://real-estate-o6kv.onrender.com/uploadfiles",
         formData,
         {
           headers: {
@@ -59,6 +59,7 @@ export default function CreateListing() {
         }
       );
       const uploadedImagesUrl = res.data.fileUrls;
+      
       setFormDatas({
         ...formDatas,
         imageUrls: [...formDatas.imageUrls, ...uploadedImagesUrl],
@@ -98,7 +99,8 @@ export default function CreateListing() {
     if (
       e.target.type === "text" ||
       e.target.id === "regularPrice" || 
-     e.target.id === "discountPrice"
+      e.target.id === "discountPrice" ||
+      e.target.type === "number"
     ) {
       setFormDatas({
         ...formDatas,
@@ -129,7 +131,7 @@ export default function CreateListing() {
       if (data.success === false) {
         setError(data.message);
         }
-        navigate(`listing/${data._id}`)
+        navigate(`/listing/${data._id}`)
     } catch (error) {
       setError(error.message);
     }
