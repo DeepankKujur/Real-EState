@@ -11,7 +11,7 @@ const ContactUs = () => {
       role: "full stack developer",
       description:
         " built RESTful APIs with Node.js, managed MongoDB, and developed responsive UIs using React. implemented JWT authentication, ensured smooth frontend-backend integration, and deployed the app using Render.followed best practices for security, version control, and performance while maintaining clean, modular, and scalable code.",
-      image: "https://lh3.googleusercontent.com/ogw/AF2bZyjcZCE0zxJXE0T69YE4SvAjNPN6sFpawofedr8biew6ySc=s64-c-mo",
+      image: "https://media-del2-2.cdn.whatsapp.net/v/t61.24694-24/486428663_1604751470221225_7297752422690472191_n.jpg?ccb=11-4&oh=01_Q5Aa1gH_Q5Y_Q4fI1ylwr_bd_-SrpHcAknluWW-7M4O1J-jgCw&oe=6832E2FD&_nc_sid=5e03e0&_nc_cat=104",
       socials: {
         twitter: "https://twitter.com",
         linkedin: "https://linkedin.com",
