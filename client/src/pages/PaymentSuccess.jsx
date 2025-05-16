@@ -152,7 +152,7 @@ export default function PaymentSuccess() {
               <p className="text-sm text-gray-500">
                 Need help?{" "}
                 <Link
-                  to="/contact"
+                  to="/connectus"
                   className="text-blue-400 hover:text-blue-300 font-medium underline"
                 >
                   Contact our support team
