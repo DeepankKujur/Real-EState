@@ -68,7 +68,11 @@ export const recordPurchase = async (req, res) => {
       { new: true }
     );
 
-    sendMail(email,`welcome to out real-estate project`,`Hi ,${username} Thank you for registering....`)
+sendMail(
+  email,
+  "Welcome to our Real Estate Project",
+  `Hi ${username},\n\nThank you for purchasing a house through our platform! We're excited to have you as part of our community.\n\nFor more details about your purchase, please check your dashboard or contact our support team.\n\nBest regards,\nThe Real Estate Team`
+);
     res.status(201).json({ 
       success: true, 
       purchase 
