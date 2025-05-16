@@ -47,7 +47,7 @@ const Chatbot = () => {
       {/* Chat Icon */}
       {!isChatOpen && (
         <button
-          className="bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition"
+          className="bg-red-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition"
           onClick={() => setIsChatOpen(true)}
         >
           <MessageCircle size={40} />
