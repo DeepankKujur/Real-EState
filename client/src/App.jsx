@@ -18,7 +18,7 @@ import TermsAndCondition from './pages/TermsAndCondition';
 import UpdateListing from './pages/UpdateListing';
 import ConnectUs from './pages/ConnectUs';
 import MyPurchases from './pages/MyPurchases';
-import PaymentSuccess from './pages/paymentSuccess';
+import PaymentSuccess from './pages/PaymentSuccess';
 
 
   
