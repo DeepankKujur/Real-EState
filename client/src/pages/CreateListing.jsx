@@ -277,7 +277,7 @@ export default function CreateListing() {
                 <label htmlFor="regular-price" className="text-sm">
                   Regular Price
                 </label>
-                <span className="text-xs">($/month)</span>
+                <span className="text-xs">(₹/month)</span>
               </div>
             </div>
             {formDatas.offer && (
@@ -296,7 +296,7 @@ export default function CreateListing() {
                   <label htmlFor="discount-price" className="text-sm">
                     Discount Price
                   </label>
-                  <span className="text-xs">($/month)</span>
+                  <span className="text-xs">(₹/month)</span>
                 </div>
               </div>
             )}

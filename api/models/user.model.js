@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  purchases: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Purchase'
+  },
   avatar: {
     type: String,
     default:"https://images.pexels.com/photos/3792581/pexels-photo-3792581.jpeg?cs=srgb&dl=pexels-bertellifotografia-3792581.jpg&fm=jpg"

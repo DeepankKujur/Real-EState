@@ -11,6 +11,15 @@ import cors from "cors";
 import cloudinary from "cloudinary";
 import { fileURLToPath } from "url";
 
+import paymentRoutes from "./routes/paymentRoutes.js";
+
+
+
+// Add payment route
+
+// Existing code...
+
+
 // Configure dotenv and MongoDB connection
 dotenv.config();
 mongoose
@@ -93,6 +102,9 @@ app.post("/uploadfiles", upload.array("files", 6), async (req, res) => {
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
+app.use("/api/payment", paymentRoutes);
+
+
 
 // Serve static files
 const __dirname = path.resolve();
@@ -109,6 +121,8 @@ app.use((err, req, res, next) => {
   const message = err.message || "Internal server error";
   res.status(statusCode).json({ success: false, statusCode, message });
 });
+
+
 
 // Start the server
 const PORT = 3000;

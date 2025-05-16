@@ -33,7 +33,10 @@ export default function Profile() {
     if (file) {
       handleFileUpload(file);
     }
+   
+
   }, [file]);
+  console.log(currentUser,"uduhhhd")
 
   const handleFileUpload = async (file) => {
     try {
@@ -242,6 +245,12 @@ export default function Profile() {
               className="w-full py-2 px-4 text-sm text-white font-semibold rounded-md bg-purple-600 text-center hover:bg-purple-700 hover:shadow-lg focus:outline-none transition-all"
             >
               Create Listing
+            </Link>
+            <Link
+              to="/my-purchases"
+              className="w-full py-2 px-4 text-sm text-white font-semibold rounded-md bg-purple-600 text-center hover:bg-purple-700 hover:shadow-lg focus:outline-none transition-all"
+            >
+              Purchased Property
             </Link>
             {/* Additional Links */}
             <div className="flex justify-between text-sm mt-4">

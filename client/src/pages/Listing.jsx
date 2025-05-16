@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
@@ -27,6 +27,7 @@ export default function Listing() {
   const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
+    console.log(currentUser.email)
     const fetchListing = async () => {
       try {
         const res = await fetch(`/api/listing/get/${params.listingId}`);
@@ -42,13 +43,88 @@ export default function Listing() {
         setLoading(false);
         setError(false);
       } catch (error) {
+        console.log(error);
         setError(true);
         setLoading(false);
       }
+
     };
 
     fetchListing();
   }, [params.listingId]);
+
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const handleBuyNow = async () => {
+    const isScriptLoaded = await loadRazorpayScript();
+
+    if (!isScriptLoaded) {
+      alert("Failed to load Razorpay SDK. Please check your connection.");
+      return;
+    }
+    const res = await fetch("/api/payment/create-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: listing.offer ? listing.discountPrice : listing.regularPrice,
+      }),
+    });
+    const { order } = await res.json();
+    console.log(order)
+
+    const options = {
+      key: "rzp_test_dNPGZU4W5bDW6x", // replace this with your Razorpay key
+      amount: order.amount,
+      currency: order.currency,
+      name: "Real Estate Booking",
+      description: listing.name,
+      order_id: order.id,
+
+      handler: async function (response) {
+        await fetch("/api/payment/record-purchase", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: currentUser._id,
+            listingId: listing._id,
+            paymentId: response.razorpay_payment_id,
+            amount: listing.offer ? listing.discountPrice : listing.regularPrice,
+            orderId: response.razorpay_order_id,
+            signature: response.razorpay_signature,
+            email:currentUser.email,
+            username:currentUser.username,
+          }),
+        });
+
+        setTimeout(() => {
+          window.location.href = `/payment-success?payment_id=${response.razorpay_payment_id}`;
+        }, 1500);
+      },
+      prefill: {
+        name: currentUser?.username || "Guest",
+        email: currentUser?.email || "example@example.com",
+        contact: "9999999999", // optionally fetch user's phone number
+      },
+      theme: {
+        color: "#10B981", // Tailwind green
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  };
+
+
 
   return (
     <main>
@@ -135,20 +211,22 @@ export default function Listing() {
               </li>
             </ul>
             {currentUser && listing.userRef !== currentUser._id && !contact && (
-              <button
-                onClick={() => setContact(true)}
-                className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
-              >
-                Contact landlord
-              </button>
-              
+              <div className="flex gap-4">
+                <button
+                  onClick={() => setContact(true)}
+                  className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3 flex-1"
+                >
+                  Contact Landlord
+                </button>
+                <button
+                  onClick={handleBuyNow}
+                  className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3 flex-1"
+                >
+                  Buy Now
+                </button>
+              </div>
             )}
-            <button
-                onClick={() => setContact(true)}
-                className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
-              >
-                Buy Now
-              </button>
+
             {contact && <Contact listing={listing} />}
           </div>
         </div>
